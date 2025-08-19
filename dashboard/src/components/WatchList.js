@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {Tooltip, Grow} from "@mui/material";
 import { watchlist } from "../data/data";
 import { BarChartOutlined } from "@mui/icons-material";
 import { MoreHoriz } from "@mui/icons-material";
 import { DoughnoutChart } from "./DoughnoutChart";
-
+import axios from "axios";
+import GeneralContext from "./GeneralContext";
 const labels = watchlist.map((subArray) => subArray["name"]);
 
 const WatchList = () => {
@@ -93,6 +94,11 @@ const WatchListItem = ({ stock }) => {
 };
 
 const WatchListActions = ({uid}) => {
+  const generalContext = useContext(GeneralContext);
+  const handleBuyClick = () => {
+    generalContext.openBuyWindow(uid);
+  };
+
   return (
     <span className="actions">
       <span>
